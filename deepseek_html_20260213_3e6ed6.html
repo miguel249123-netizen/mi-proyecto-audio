@@ -1,0 +1,676 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feliz Día de San Valentín Daniela 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Aquí puedes insertar tu imagen de fondo */
+            background-image: url('ppp.png');
+            /* O usa este código para insertar la imagen subida */
+            /* background-image: url('/mnt/user-data/uploads/premium_photo-1669863278824-f73c824bc671.png'); */
+            
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-color: #000000;
+            min-height: 100vh;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            position: relative;
+        }
+        
+        /* Overlay oscuro opcional sobre la imagen */
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 159%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+            z-index: 0;
+        }
+
+        /* LUNA LLENA EN EL FONDO */
+        .luna {
+            content: '';
+            position: absolute;
+            top: 15%;
+            left: 84%;
+            transform: translate(-50%, -50%);
+            width: 70vmin;
+            height: 70vmin;
+            background: radial-gradient(circle at 30% 30%, #fff9e6, #f0e6d2);
+            border-radius: 50%;
+            box-shadow: 0 0 100px 40px rgba(255, 240, 200, 0.6);
+            z-index: -1;
+            animation: palpitarLuna 12s ease-in-out infinite;
+        }
+
+        @keyframes palpitarLuna {
+            0%, 100% {
+                transform: translate(-50%, -50%) scale(1);
+                box-shadow: 0 0 100px 40px rgba(255, 240, 200, 0.6);
+            }
+            50% {
+                transform: translate(-50%, -50%) scale(1.02);
+                box-shadow: 0 0 120px 50px rgba(255, 245, 210, 0.8);
+            }
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            position: relative;
+            z-index: 2; /* El contenido principal está por encima de la luna */
+        }
+
+        .title {
+            color: #ffffff;
+            font-size: 2em;
+            margin-bottom: 120px;
+            text-align: center;
+            letter-spacing: 2px;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+        }
+
+        .heart-container {
+            position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            z-index: 10; /* El corazón tiene un z-index alto */
+        }
+
+        .heart-container:hover {
+            transform: scale(1.05);
+        }
+
+        .heart {
+            width: 200px;
+            height: 200px;
+            position: relative;
+            animation: pulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 40px rgba(255, 50, 80, 0.8));
+            margin-left: 25%;
+        }
+
+        .heart::before,
+        .heart::after {
+            content: "";
+            position: absolute;
+            width: 100px;
+            height: 160px;
+            background: #ff3250;
+            border-radius: 100px 100px 0 0;
+        }
+
+        .heart::before {
+            left: 50px;
+            transform: rotate(-45deg);
+            transform-origin: 0 100%;
+        }
+
+        .heart::after {
+            left: 0;
+            transform: rotate(45deg);
+            transform-origin: 75% 63%;
+        }
+
+        .heart-shine {
+            position: absolute;
+            width: 60px;
+            height: 30px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            top: 40px;
+            left: 55px;
+            transform: rotate(-45deg);
+            z-index: 1;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.08);
+            }
+        }
+
+        .message {
+            color: #ffb3c1;
+            font-size: 1.5em;
+            margin-top: 40px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(255, 179, 193, 0.5);
+        }
+
+        /* Estrellas */
+        .star {
+            position: absolute;
+            width: 3px;
+            height: 3px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 4s ease-in-out infinite;
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0.3;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.5);
+            }
+        }
+
+        /* Frases que caen - MODIFICADO para efecto de profundidad */
+        .falling-phrase {
+            position: absolute;
+            color: #ffb3c1;
+            font-size: 1.2em;
+            padding: 15px 25px;
+            background: rgba(255, 50, 80, 0.2);
+            border: 2px solid rgba(255, 179, 193, 0.5);
+            border-radius: 30px;
+            backdrop-filter: blur(10px);
+            white-space: nowrap;
+            pointer-events: none;
+            text-shadow: 0 0 10px rgba(255, 179, 193, 0.8);
+            z-index: 5; /* Valor intermedio por defecto */
+            opacity: 0; /* Inician invisibles */
+        }
+
+        /* Animaciones modificadas - empiezan detrás y terminan delante */
+        .fall-style-1 {
+            animation: fountainDepth1 5s ease-out forwards;
+        }
+
+        .fall-style-2 {
+            animation: fountainDepth2 5.5s ease-out forwards;
+        }
+
+        .fall-style-3 {
+            animation: fountainDepth3 5.2s ease-out forwards;
+        }
+
+        .fall-style-4 {
+            animation: fountainDepth4 5.8s ease-out forwards;
+        }
+
+        .fall-style-5 {
+            animation: fountainDepth5 5.3s ease-out forwards;
+        }
+
+        /* Animaciones con profundidad - SUBEN DETRÁS (z-index bajo) y BAJAN DELANTE (z-index alto) */
+        @keyframes fountainDepth1 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+                z-index: 1; /* Detrás */
+            }
+            5% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                z-index: 1; /* Sigue detrás al empezar a subir */
+            }
+            30% {
+                transform: translateY(-180px) translateX(20px) rotate(10deg) scale(1);
+                z-index: 1; /* Permanece detrás durante toda la subida */
+            }
+            40% {
+                z-index: 100; /* Cambia a delante justo antes de empezar a caer */
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(20px) translateX(30px) rotate(15deg) scale(0.95);
+                z-index: 100; /* Delante mientras cae */
+            }
+            100% {
+                transform: translateY(calc(100vh)) translateX(40px) rotate(25deg) scale(0.9);
+                opacity: 0;
+                z-index: 100; /* Delante hasta el final */
+            }
+        }
+
+        @keyframes fountainDepth2 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+                z-index: 1;
+            }
+            5% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                z-index: 1;
+            }
+            30% {
+                transform: translateY(-200px) translateX(-25px) rotate(-12deg) scale(1.05);
+                z-index: 1;
+            }
+            40% {
+                z-index: 100;
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(20px) translateX(-35px) rotate(-18deg) scale(0.95);
+                z-index: 100;
+            }
+            100% {
+                transform: translateY(calc(100vh)) translateX(-50px) rotate(-30deg) scale(0.9);
+                opacity: 0;
+                z-index: 100;
+            }
+        }
+
+        @keyframes fountainDepth3 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+                z-index: 1;
+            }
+            5% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                z-index: 1;
+            }
+            30% {
+                transform: translateY(-160px) translateX(35px) rotate(15deg) scale(1.08);
+                z-index: 1;
+            }
+            40% {
+                z-index: 100;
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(20px) translateX(45px) rotate(22deg) scale(0.95);
+                z-index: 100;
+            }
+            100% {
+                transform: translateY(calc(100vh)) translateX(60px) rotate(35deg) scale(0.85);
+                opacity: 0;
+                z-index: 100;
+            }
+        }
+
+        @keyframes fountainDepth4 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+                z-index: 1;
+            }
+            5% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                z-index: 1;
+            }
+            30% {
+                transform: translateY(-190px) translateX(-15px) rotate(-8deg) scale(1.03);
+                z-index: 1;
+            }
+            40% {
+                z-index: 100;
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(20px) translateX(-25px) rotate(-12deg) scale(0.95);
+                z-index: 100;
+            }
+            100% {
+                transform: translateY(calc(100vh)) translateX(-35px) rotate(-22deg) scale(0.88);
+                opacity: 0;
+                z-index: 100;
+            }
+        }
+
+        @keyframes fountainDepth5 {
+            0% {
+                transform: translateY(0) translateX(0) rotate(0deg) scale(0.5);
+                opacity: 0;
+                z-index: 1;
+            }
+            5% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg) scale(1);
+                z-index: 1;
+            }
+            30% {
+                transform: translateY(-170px) translateX(10px) rotate(5deg) scale(1.05);
+                z-index: 1;
+            }
+            40% {
+                z-index: 100;
+            }
+            85% {
+                opacity: 1;
+                transform: translateY(20px) translateX(20px) rotate(10deg) scale(0.95);
+                z-index: 100;
+            }
+            100% {
+                transform: translateY(calc(100vh)) translateX(25px) rotate(18deg) scale(0.92);
+                opacity: 0;
+                z-index: 100;
+            }
+        }
+
+        /* Reproductor de música */
+        .music-player {
+            position: fixed;
+            top: 20px;
+            left: 31%;
+            transform: translateX(-50%);
+            background: rgba(30, 20, 30, 0.85);
+            border: 2px solid rgba(255, 179, 193, 0.3);
+            border-radius: 20px;
+            padding: 12px 20px;
+            display: none;
+            flex-direction: column;
+            gap: 10px;
+            backdrop-filter: blur(15px);
+            z-index: 9999;
+            width: 90%;
+            max-width: 50%;
+        }
+
+        .music-player.active {
+            display: flex;
+        }
+
+        .music-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .play-pause-btn {
+            width: 45px;
+            height: 45px;
+            background: #ff3250;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3em;
+            transition: transform 0.2s;
+            flex-shrink: 0;
+        }
+
+        .play-pause-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .music-text {
+            color: #ffb3c1;
+            font-size: 1em;
+            flex: 1;
+        }
+
+        .music-emoji {
+            font-size: 1.3em;
+        }
+
+        /* Barra de progreso */
+        .progress-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .time-display {
+            color: #ffb3c1;
+            font-size: 0.85em;
+            min-width: 35px;
+        }
+
+        .progress-bar {
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 179, 193, 0.2);
+            border-radius: 10px;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #ff3250;
+            border-radius: 10px;
+            width: 0%;
+            position: relative;
+            transition: width 0.1s linear;
+        }
+
+        .progress-handle {
+            position: absolute;
+            right: -8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+            background: white;
+            border-radius: 50%;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <!-- LUNA LLENA EN EL FONDO -->
+    <div class="luna"></div>
+
+    <div class="music-player" id="musicPlayer">
+        <div class="music-header">
+            <button class="play-pause-btn" id="playPauseBtn">⏸</button>
+            <span class="music-text">Te dedico esta canción ✨</span>
+        </div>
+        <div class="progress-container">
+            <span class="time-display" id="currentTime">0:00</span>
+            <div class="progress-bar" id="progressBar">
+                <div class="progress-fill" id="progressFill">
+                    <div class="progress-handle"></div>
+                </div>
+            </div>
+            <span class="time-display" id="totalTime">1:00</span>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="title">Feliz Día de San Valentín Daniela 💕</div>
+
+        <div class="heart-container" id="heartContainer">
+            <div class="heart">
+                <div class="heart-shine"></div>
+            </div>
+        </div>
+        
+        <div class="message">Presiona el corazón...</div>
+    </div>
+
+    <audio id="music" loop>
+        <!-- Puedes agregar tu canción aquí -->
+        <source src="Querer Querernos - Canserbero (Letra).mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Crear estrellas
+        function createStars() {
+            const numStars = 60;
+            const body = document.body;
+            
+            for (let i = 0; i < numStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 4 + 's';
+                star.style.animationDuration = (3 + Math.random() * 3) + 's';
+                body.appendChild(star);
+            }
+        }
+
+        createStars();
+
+        // Frases románticas
+        const phrases = [
+            "Eres una madre increíble ✨",
+            "No dejo de pensar en ti",
+            "Admiro lo fuerte que eres <3",
+            "Espero verte muy pronto",
+            "Me encantan tus lindos ojos...",
+            "Querer querernos es lo mejor que me paso",
+            "Eres de esas personas que valen la pena 🌹",
+            "Me gusta tu forma de ver la vida 💫",
+            "Gracias por dejarme estar cerca de ti 🤝",
+            "Tu fuerza me motiva cada día",
+            "Eres mucho más de lo que crees ✨",
+            "Me haces bien con solo estar ",
+            "Eres una mujer excepcional 💖",
+            "Contigo el tiempo no importa",
+            "Me gustas así, tal como eres 💘",
+            "Gran madre, mejor mujer 🌹",
+            "No te saco de mi mente ",
+            "Tu fuerza me inspira <3",
+            "Cuento los días para verte",
+            "Tus ojos lo dicen todo ✨",
+            "Admiro tu valentía",
+            "Me haces mucha falta",
+            "Qué linda eres, de verdad 🌻",
+            "Me encanta escucharte ",
+            "Quédate en mis planes ",
+            "Eres única, créetelo ✨",
+            "Te pienso... y sonrío",
+            "Amo tu energía",
+            "Eres mi Darling ✨",
+            "Mi mundo tiene sentido contigo",
+            "Eres mi 'Zero Two' ",
+            "Te quiero como el lobo al stiv 🎮",
+            "No necesito brújula si estás tú",
+            "Tú y yo, el Franxx perfecto",
+            "Eres mi diamante en en minecraft 💎",
+            "Prometo no dejarte morir nunca ❤️",
+            "Nuestros hilos están conectados",
+            "Eres el bioma más lindo que vi 🌸",
+            "Mi inventario está lleno de tu"
+        ];
+
+        const heartContainer = document.getElementById('heartContainer');
+        const music = document.getElementById('music');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const progressBar = document.getElementById('progressBar');
+        const progressFill = document.getElementById('progressFill');
+        const currentTime = document.getElementById('currentTime');
+        const totalTime = document.getElementById('totalTime');
+        let isPlaying = false;
+
+        // Formatear tiempo
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        // Actualizar barra de progreso
+        function updateProgress() {
+            const progress = (music.currentTime / music.duration) * 100;
+            progressFill.style.width = progress + '%';
+            currentTime.textContent = formatTime(music.currentTime);
+        }
+
+        // Actualizar duración total
+        music.addEventListener('loadedmetadata', () => {
+            totalTime.textContent = formatTime(music.duration);
+        });
+
+        // Actualizar progreso mientras reproduce
+        music.addEventListener('timeupdate', updateProgress);
+
+        // Click en barra de progreso
+        progressBar.addEventListener('click', (e) => {
+            const rect = progressBar.getBoundingClientRect();
+            const percent = (e.clientX - rect.left) / rect.width;
+            music.currentTime = percent * music.duration;
+        });
+
+        // Función para crear y animar frases
+        function createFallingPhrase() {
+            const phrase = document.createElement('div');
+            phrase.className = 'falling-phrase';
+            
+            // Seleccionar animación aleatoria
+            const animationStyle = Math.floor(Math.random() * 5) + 1;
+            phrase.classList.add(`fall-style-${animationStyle}`);
+            
+            phrase.textContent = phrases[Math.floor(Math.random() * phrases.length)];
+            
+            // Posicionar en el centro (donde está el corazón)
+            phrase.style.left = '35%';
+            phrase.style.top = '50%';
+            phrase.style.transform = 'translate(-50%, -50%)';
+            
+            document.body.appendChild(phrase);
+
+            // Duración basada en la animación
+            const durations = [5000, 5500, 5200, 5800, 5300];
+            setTimeout(() => {
+                phrase.remove();
+            }, durations[animationStyle - 1]);
+        }
+
+        // Click en el corazón
+        heartContainer.addEventListener('click', () => {
+            console.log('Corazón clickeado');
+            console.log('isPlaying:', isPlaying);
+            
+            if (!isPlaying) {
+                // Mostrar el reproductor inmediatamente
+                musicPlayer.classList.add('active');
+                console.log('Clase active añadida');
+                
+                music.play().then(() => {
+                    isPlaying = true;
+                    playPauseBtn.textContent = '⏸';
+                    console.log('Música iniciada correctamente');
+                }).catch(err => {
+                    console.log('Error al reproducir:', err);
+                    // Aunque falle la música, mostrar el reproductor
+                    playPauseBtn.textContent = '▶';
+                });
+            }
+            
+            createFallingPhrase();
+        });
+
+        // Control del reproductor
+        playPauseBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (isPlaying) {
+                music.pause();
+                playPauseBtn.textContent = '▶';
+                isPlaying = false;
+            } else {
+                music.play();
+                playPauseBtn.textContent = '⏸';
+                isPlaying = true;
+            }
+        });
+    </script>
+</body>
+</html>
